@@ -130,8 +130,19 @@ class AlbumsScreen extends ConsumerWidget {
                   },
                 ),
                 loading: () => const Center(child: CircularProgressIndicator()),
-                error: (error, stack) =>
-                    Center(child: Text('Error loading albums: $error')),
+                error: (error, stack) => Center(
+                  child: Column(
+                    children: [
+                      Text('Error loading albums: $error'),
+                      IconButton(
+                        onPressed: () => ref
+                            .read(albumRefreshProvider.notifier)
+                            .refreshData(),
+                        icon: Icon(Icons.refresh),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ],

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:photo_album/model/album.dart';
 import 'package:photo_album/model/user.dart';
@@ -17,12 +19,14 @@ class AlbumRefreshNotifier extends StateNotifier<bool> {
 
       if (selectUser != null) {
         ref.invalidate(albumsByUserProvider(selectUser.id));
-        await ref.read(albumsByUserProvider(selectUser.id).future);
+        // await ref.read(albumsByUserProvider(selectUser.id).future);
       } else {
         ref.invalidate(albumsProvider);
-        await ref.read(albumsProvider.future);
+        // await ref.read(albumsProvider.future);
       }
-      await ref.read(usersProvider.future);
+      // await ref.read(usersProvider.future);
+    } catch (e) {
+      log(e.toString());
     } finally {
       state = false;
     }

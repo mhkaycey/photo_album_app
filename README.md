@@ -21,6 +21,10 @@ A beautiful Flutter photo album application that allows users to browse albums, 
 
 *Browse albums with user filtering* | *Grid view of album photos* | *Full-screen photo viewing*
 
+| Albums Video    | 
+|-----------------|
+| ![Albums Video](screenshots/app_video.mov) |
+
 ## 🚀 Getting Started
 
 ### Prerequisites
