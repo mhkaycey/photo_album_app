@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:photo_album/providers/photos_provider.dart';
+import 'package:photo_album/providers/filtered_photo.dart';
 import 'package:photo_album/screens/photo_viewer_screen.dart';
 
 class SearchScreen extends ConsumerWidget {
@@ -10,7 +10,7 @@ class SearchScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final searchQuery = ref.watch(searchQueryProvider);
-    final filteredPhotosAsync = ref.watch(filteredPhotosProvider);
+    final filteredPhotosAsync = ref.watch(filteredPhotosprovider);
 
     return Scaffold(
       appBar: AppBar(

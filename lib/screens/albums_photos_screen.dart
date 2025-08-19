@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:photo_album/model/album.dart';
-import 'package:photo_album/providers/photos_provider.dart';
+import 'package:photo_album/providers/photo_by_album.dart';
 import 'package:photo_album/screens/photo_viewer_screen.dart';
 
 class AlbumPhotosScreen extends ConsumerWidget {

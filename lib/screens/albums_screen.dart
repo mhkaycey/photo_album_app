@@ -2,7 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:photo_album/model/user.dart';
+import 'package:photo_album/providers/album_by_user.dart';
 import 'package:photo_album/providers/album_provider.dart';
+import 'package:photo_album/providers/filtered_photo.dart';
+import 'package:photo_album/providers/photos_provider.dart';
+import 'package:photo_album/providers/refresh_data.dart';
+import 'package:photo_album/providers/user_provider.dart';
 import 'package:photo_album/screens/albums_photos_screen.dart';
 import 'package:photo_album/screens/favorites_screen.dart';
 import 'package:photo_album/screens/search_screen.dart';
@@ -15,8 +20,10 @@ class AlbumsScreen extends ConsumerWidget {
     final usersAsync = ref.watch(usersProvider);
     final selectedUser = ref.watch(selectedUserProvider);
     final albumsAsync = selectedUser != null
-        ? ref.watch(albumsByUserProvider(selectedUser.id))
+        ? ref.watch(albumByUserProvider(selectedUser.id))
         : ref.watch(albumsProvider);
+    final filteredPhotosAsync = ref.watch(filteredPhotosprovider);
+    final searchQuery = ref.watch(searchQueryProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -46,13 +53,16 @@ class AlbumsScreen extends ConsumerWidget {
         ],
       ),
       body: RefreshIndicator(
-        onRefresh: () => ref.read(albumRefreshProvider.notifier).refreshData(),
+        onRefresh: () {
+          return ref.read(refreshDataProvider.notifier).refreshData();
+        },
         child: Column(
           children: [
             // User filter dropdown
             Container(
               padding: const EdgeInsets.all(16.0),
               child: usersAsync.when(
+                skipError: true,
                 data: (users) => DropdownButtonFormField<User?>(
                   decoration: const InputDecoration(
                     labelText: 'Filter by User',
@@ -74,12 +84,13 @@ class AlbumsScreen extends ConsumerWidget {
                   },
                 ),
                 loading: () => const CircularProgressIndicator(),
-                error: (error, stack) => Text('Error loading users: $error'),
+                error: (error, stack) => Text('$error'),
               ),
             ),
             // Albums grid
             Expanded(
               child: albumsAsync.when(
+                skipError: true,
                 data: (albums) => GridView.builder(
                   padding: const EdgeInsets.all(16.0),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -133,11 +144,12 @@ class AlbumsScreen extends ConsumerWidget {
                 error: (error, stack) => Center(
                   child: Column(
                     children: [
-                      Text('Error loading albums: $error'),
+                      Text('$error'),
                       IconButton(
                         onPressed: () => ref
-                            .read(albumRefreshProvider.notifier)
+                            .read(refreshDataProvider.notifier)
                             .refreshData(),
+                        // ref.read(albumsProvider.notifier).refreshAlbums(),
                         icon: Icon(Icons.refresh),
                       ),
                     ],

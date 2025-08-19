@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:photo_album/providers/photos_provider.dart';
+import 'package:photo_album/providers/favorite_provider.dart';
 import 'package:photo_album/screens/photo_viewer_screen.dart';
 
 class FavoritesScreen extends ConsumerWidget {
@@ -9,7 +9,7 @@ class FavoritesScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final favoritePhotosAsync = ref.watch(favoritePhotosProvider);
+    final favoritePhotosAsync = ref.watch(favoriteProvider);
 
     return Scaffold(
       appBar: AppBar(
