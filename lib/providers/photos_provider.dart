@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:photo_album/model/photo.dart';
 import 'package:photo_album/services/api_service.dart';
-import 'package:photo_album/services/favourite_service.dart';
 
 // final allPhotosProvider = FutureProvider<List<Photo>>((ref) async {
 //   return ApiService.fetchPhotos();

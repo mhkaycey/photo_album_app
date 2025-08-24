@@ -5,7 +5,6 @@ import 'package:photo_album/model/user.dart';
 import 'package:photo_album/providers/album_by_user.dart';
 import 'package:photo_album/providers/album_provider.dart';
 import 'package:photo_album/providers/filtered_photo.dart';
-import 'package:photo_album/providers/photos_provider.dart';
 import 'package:photo_album/providers/refresh_data.dart';
 import 'package:photo_album/providers/user_provider.dart';
 import 'package:photo_album/screens/albums_photos_screen.dart';
