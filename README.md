@@ -23,7 +23,7 @@ A beautiful Flutter photo album application that allows users to browse albums, 
 
 | Albums Video    | 
 |-----------------|
-| <video src="screenshots/app_video.mov" controls width="300"></video> |
+| <video src="screenshots/app_video.mov" controls width="300"> Video</video> |
 
 ## 🚀 Getting Started
 
